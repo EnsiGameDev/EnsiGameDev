@@ -23,9 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('games/', include('games.urls')),
     path('login/', include('login.urls'),name='log_in'),
+    path('upload/', include('upload.urls'),name='upload')
     path("", include('home.urls')),
 ]
 
 # add static url patterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

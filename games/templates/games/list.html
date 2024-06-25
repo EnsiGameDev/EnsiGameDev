@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block styles %}
+    <!-- statics css files -->
+    <style>
+        :root{
+            --px-button-left: url("{% static 'games/img/px-button-left.png' %}");
+            --px-button-right: url("{% static 'games/img/px-button-right.png' %}");
+            --px-button-center: url("{% static 'games/img/px-button-center.png' %}");
+        }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'games/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Games</h1>
+    <div class="row m-2">
+        {% for game in games %}
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="{{ game.picture.url }}" alt="{{ game.name }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ game.name }}</h5>
+                        <a href="{% url 'games:detail' game.id %}" class="pixel-button">Play</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'games',
     'login',
     'upload',
+    'home',
 ]
 
 MIDDLEWARE = [

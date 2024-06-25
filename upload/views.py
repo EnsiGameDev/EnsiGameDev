@@ -16,13 +16,17 @@ def upload(request):
         # Sauvegarder les fichiers
         fs = FileSystemStorage()
         game_foldername = fs.save(game_folder.name, game_folder)
-
+        
+         # Créer une instance de Game mais ne pas encore définir le champ `index`
+        game = Game(picture=game_image, name='')
+        game.save()
+        
         # Décompresser le dossier de jeu s'il est en format zip
         game_folder_path = fs.path(game_foldername)
         if game_folder_path.endswith('.zip'):
             # Définir le chemin d'extraction
-            game_number = Game.objects.count() + 1  # Calculer le numéro du jeu
-            extract_path = os.path.join(fs.location, 'games-list', f'jeu{game_number}')
+            game_number = game.id  # Calculer le numéro du jeu
+            extract_path = os.path.join(fs.location, 'games-list', f'game{game_number}')
             
             # Créer le dossier d'extraction s'il n'existe pas
             os.makedirs(extract_path, exist_ok=True)
@@ -54,13 +58,10 @@ def upload(request):
         if not game_index:
             return render(request, 'upload.html', {'error': 'Aucun fichier .html trouvé dans le dossier du jeu.'})
         
-        # Créer et sauvegarder une nouvelle instance du modèle Game
-        game = Game(
-            picture=game_image,  # Le chemin vers l'image sauvegardée
-            name=os.path.splitext(game_folder.name)[0],  # Nom du jeu sous la forme jeu<numéro du jeu>
-            index=game_index  # Nom du fichier zip sans l'extension comme index
-        )
+        game.name=os.path.splitext(game_folder.name)[0]  # Nom du jeu
+        game.index = game_index
         game.save()
+
         # Redirection après traitement
         return redirect('games:list')  # Remplacer 'games_list' par le nom de votre URL de destination
 

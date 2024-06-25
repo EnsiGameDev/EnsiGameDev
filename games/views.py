@@ -36,11 +36,14 @@ def serve_static(request, file_name):
     else:
         raise Http404("Requested file does not exist")
     
+def list(request):
+    games = Game.objects.all()
+    return render(request, 'games/list.html', {'games': games})
 
+# methods
 def lookup_game_id(file_name):
     # get file name without extension
     file_name = file_name.split(".")[0]
     # get game id from name and model Game
     game = Game.objects.get(index=file_name)
     return game.id
-    

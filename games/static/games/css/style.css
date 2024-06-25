@@ -1,0 +1,51 @@
+body{
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (Safari/Chrome 22+) */
+    image-rendering: -o-crisp-edges; /* Opera */
+    image-rendering: pixelated; 
+}
+
+.card-img-top {
+    aspect-ratio: 6 / 4;
+    width: 100%;
+    color:white;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* pixel buttons */
+.pixel-button{
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (Safari/Chrome 22+) */
+    image-rendering: -o-crisp-edges; /* Opera */
+    image-rendering: pixelated; 
+
+    display: inline-block;
+    padding: 8px 32px;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background-image: var(--px-button-center);
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+}
+
+.pixel-button::before, .pixel-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 32px; /* Adjust based on your images' width */
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.pixel-button::before {
+    left: -3px;
+    background-image: var(--px-button-left);
+}
+
+.pixel-button::after {
+    right: -16px;
+    background-image: var(--px-button-right);
+}

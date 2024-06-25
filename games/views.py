@@ -9,7 +9,7 @@ from django.http import FileResponse
 def detail(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     # generate file url to render
-    file_path = settings.BASE_DIR / "games-list" / f"jeu{game.id}" / f"{game.index}.html"
+    file_path = settings.BASE_DIR / "games-list" / f"game{game.id}" / f"{game.index}.html"
     
     # Ensure the file exists
     if not file_path.exists():
@@ -25,10 +25,10 @@ def serve_static(request, file_name):
     # get game id from file name
     game_id = lookup_game_id(file_name)
     # Construct the path to the game's static folder
-    file_path = settings.BASE_DIR / "games-list" / f"jeu{game_id}" / file_name
+    file_path = settings.BASE_DIR / "games-list" / f"game{game_id}" / file_name
 
     # Security check - prevent directory traversal
-    if not os.path.realpath(file_path).startswith(os.path.realpath(settings.BASE_DIR / "games-list" / f"jeu{game_id}")):
+    if not os.path.realpath(file_path).startswith(os.path.realpath(settings.BASE_DIR / "games-list" / f"game{game_id}")):
         raise Http404("Security error. Access denied.")
 
     if file_path.exists() and file_path.is_file():

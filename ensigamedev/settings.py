@@ -29,6 +29,10 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST', '*')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://ensigame.dev'
+]
+
 # Application definition
 
 INSTALLED_APPS = [

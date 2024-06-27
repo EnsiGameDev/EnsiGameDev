@@ -1,0 +1,21 @@
+services:
+  ensigamedev:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
+      - ./static:/app/static
+      - ./images:/app/images
+    environment:
+      DJANGO_CSRF_TRUSTED_ORIGINS: 'http://localhost:8000'
+
+  ensigamedev-proxy:
+    image: nginx:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/static:ro
+      - ./images:/images:ro
+    depends_on:
+      - ensigamedev

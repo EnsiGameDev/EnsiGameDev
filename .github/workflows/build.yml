@@ -17,6 +17,6 @@ jobs:
           username: wikimax
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Build Docker image
-        run: docker build -t ensigamedev .
+        run: docker build -t wikimax/ensigamedev .
       - name: Publish image to Docker Hub
         run: docker push wikimax/ensigamedev

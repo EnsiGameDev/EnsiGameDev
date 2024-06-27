@@ -1,6 +1,6 @@
 services:
   ensigamedev:
-    build: .
+    image: wikimax/ensigamedev
     restart: unless-stopped
     volumes:
       - ./db.sqlite3:/app/db.sqlite3

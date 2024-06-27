@@ -8,6 +8,7 @@ services:
         target: /app/db.sqlite3
       - ./static:/app/static
       - ./images:/app/images
+      - ./games-list:/app/games-list
     environment:
       DJANGO_CSRF_TRUSTED_ORIGINS: 'http://localhost:8000'
 
